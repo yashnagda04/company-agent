@@ -4,6 +4,8 @@ load_dotenv()
 from company_agent.agent.agent import Agent
 from company_agent.rag.create_embedding import EmbeddingManager
 import uuid
+import os, json
+from datetime import datetime
 
 
 class CompanyAgent:
@@ -26,4 +28,18 @@ class CompanyAgent:
             answer = agent.get_response(question=question)
             qa_dict[question] = answer
 
-        return qa_dict, job_id
+        output_path = self.save_dict(qa_dict=qa_dict, job_id=job_id)
+        return output_path
+    
+
+    def save_dict(self, qa_dict, job_id):
+        output_dir = "output"
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M%S")
+        filename = os.path.join(output_dir, f"{job_id}_{timestamp}.json")
+        with open(filename, "w") as f:
+            json.dump(qa_dict, f, ensure_ascii=False, indent=4)
+
+        return filename

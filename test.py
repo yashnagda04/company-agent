@@ -1,7 +1,4 @@
 from company_agent.app import CompanyAgent
-import sys, os
-import json
-from datetime import datetime
 
 questions = [
     "What is the name of the company?",
@@ -13,21 +10,10 @@ questions = [
 document_paths = ["data/handbook.pdf"]
 
 
-def save_dict(qa_dict, job_id):
-    output_dir = "output"
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M%S")
-    filename = os.path.join(output_dir, f"{job_id}_{timestamp}.json")
-    with open(filename, "w") as f:
-        json.dump(qa_dict, f, ensure_ascii=False, indent=4)
-
-
 def main():
     agent = CompanyAgent()
-    qa_dict, job_id = agent.process(questions=questions, pdf_paths=document_paths)
-    save_dict(qa_dict, job_id)
+    output_path = agent.process(questions=questions, pdf_paths=document_paths)
+    print("Output:", output_path)
 
 
 if __name__ == "__main__":
