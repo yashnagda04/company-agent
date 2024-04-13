@@ -16,7 +16,7 @@ embeddings = OpenAIEmbeddings(model=EMBEDDINGS_MODEL)
 vector_db = PGVector(
     collection_name=COLLECTION_NAME,
     connection_string=CONNECTION_STRING,
-    embedding_function=get_hyde_embedding(),
+    embedding_function=embeddings,
     distance_strategy=DistanceStrategy.COSINE,
 )
 

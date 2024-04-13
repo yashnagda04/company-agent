@@ -26,4 +26,4 @@ class CompanyAgent:
             answer = agent.get_response(question=question)
             qa_dict[question] = answer
 
-        return qa_dict
+        return qa_dict, job_id

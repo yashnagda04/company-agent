@@ -13,21 +13,21 @@ questions = [
 document_paths = ["data/handbook.pdf"]
 
 
-def save_dict(qa_dict):
+def save_dict(qa_dict, job_id):
     output_dir = "output"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = os.path.join(output_dir, f"qa_{timestamp}.json")
+    timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M%S")
+    filename = os.path.join(output_dir, f"{job_id}_{timestamp}.json")
     with open(filename, "w") as f:
         json.dump(qa_dict, f, ensure_ascii=False, indent=4)
 
 
 def main():
     agent = CompanyAgent()
-    qa_dict = agent.process(questions=questions, pdf_paths=document_paths)
-    save_dict(qa_dict)
+    qa_dict, job_id = agent.process(questions=questions, pdf_paths=document_paths)
+    save_dict(qa_dict, job_id)
 
 
 if __name__ == "__main__":
