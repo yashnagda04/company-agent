@@ -10,13 +10,13 @@ class CompanyAgent:
     def __init__(self):
         pass
 
-    def process(self, questions, pdf_path):
+    def process(self, questions, pdf_paths):
         job_id = str(uuid.uuid1())
 
         ## Step 1 - Embed and store and document in vector db
         embedding_manager = EmbeddingManager()
         embedding_manager.process_all_documents(
-            document_paths=[pdf_path], job_id=job_id
+            document_paths=pdf_paths, job_id=job_id
         )
 
         ## Step 2 - generate answer to all the questions

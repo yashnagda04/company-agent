@@ -10,7 +10,7 @@ questions = [
     "What is the termination policy?",
 ]
 
-document = "data/handbook.pdf"
+document_paths = ["data/handbook.pdf"]
 
 
 def save_dict(qa_dict):
@@ -26,7 +26,7 @@ def save_dict(qa_dict):
 
 def main():
     agent = CompanyAgent()
-    qa_dict = agent.process(questions=questions, pdf_path=document)
+    qa_dict = agent.process(questions=questions, pdf_paths=document_paths)
     save_dict(qa_dict)
 
 
