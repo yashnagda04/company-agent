@@ -14,9 +14,10 @@ def get_hyde_embedding():
     base_embeddings = OpenAIEmbeddings(model=EMBEDDINGS_MODEL)
     model = ChatOpenAI(
         model=LANUAGE_MODEL,
-        max_tokens=300,
+        max_tokens=600,
         temperature=0,
-        model_kwargs={"seed": SEED_VALUE},
+        verbose=True,
+        model_kwargs={"seed":SEED_VALUE},
     )
     chat_prompt = ChatPromptTemplate.from_messages(
         [HumanTemplate.from_template(HYDE_TEMPLATE_USER)]

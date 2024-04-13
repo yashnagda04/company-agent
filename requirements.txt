@@ -5,3 +5,4 @@ pgvector==0.2.5
 python-dotenv==1.0.1
 psycopg2-binary==2.9.9
 PyMuPDF==1.24.1
+cohere==5.2.5
